@@ -1,4 +1,4 @@
-package dict
+package client
 
 import (
 	"encoding/json"
@@ -20,12 +20,13 @@ type textPayload struct {
 }
 
 // TODO: Figure out how to store this better
+// TODO: Figure out how to use query params for this url to get specific number of words
 const randomTextURL string = "http://www.randomtext.me/api/gibberish/ul-5/5-15"
 
 // GetRandomText makes an api call and gets random
 // words and returns them as a list of tokens
-func (c *Client) GetRandomText(lowercase bool) ([]string, error) {
-	resp, err := c.httpClient.Get(randomTextURL)
+func GetRandomText(c *Client, lowercase bool) ([]string, error) {
+	resp, err := c.HTTPClient.Get(randomTextURL)
 	if err != nil {
 		return []string{}, err
 	}

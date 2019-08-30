@@ -3,22 +3,16 @@ package main
 import (
 	"fmt"
 
-	"github.com/xchenny/keyboard-warrior/src/dict"
+	"github.com/xchenny/keyboard-warrior/src/client"
+	"github.com/xchenny/keyboard-warrior/src/web"
 )
 
 func main() {
-	client, err := dict.NewClient("./src/dict/conf.yaml")
+	client, err := client.New("./src/dict/conf.yaml")
 	if err != nil {
 		fmt.Printf(fmt.Sprintf("Error occurred while creating client. Err: %v\n", err))
 	}
+	web.InitRouter(client)
 
-	lowercase := false
-	toks, err := client.GetRandomText(lowercase)
-	if err != nil {
-		fmt.Printf(fmt.Sprintf("Error occurred while getting random text. Err: %v\n", err))
-	}
-
-	for i := 0; i < len(toks); i++ {
-		fmt.Println(toks[i])
-	}
+	client.Start()
 }

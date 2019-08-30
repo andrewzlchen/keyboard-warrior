@@ -1,7 +1,10 @@
 package web
 
-import "fmt"
+import (
+	"github.com/xchenny/keyboard-warrior/src/client"
+)
 
-func main() {
-	fmt.Println("vim-go")
+// InitRouter connects HandlerFuncs to Router
+func InitRouter(c *client.Client) {
+	c.Router.GET("/words", GetWordsHandler(c, true))
 }
