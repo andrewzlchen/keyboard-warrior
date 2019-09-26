@@ -1,6 +1,7 @@
 package client
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,7 @@ func New(confPath string) (*Client, error) {
 }
 
 // Start client web server
-func (c *Client) Start() {
-	c.Router.Run()
+func (c *Client) Start(port int) {
+	portStr := fmt.Sprintf(":%v", port)
+	c.Router.Run(portStr)
 }

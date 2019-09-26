@@ -12,7 +12,9 @@ func main() {
 	if err != nil {
 		fmt.Printf(fmt.Sprintf("Error occurred while creating client. Err: %v\n", err))
 	}
+
+	// make router listen on specific routes
 	web.InitRouter(client)
 
-	client.Start()
+	client.Start(5000)
 }
